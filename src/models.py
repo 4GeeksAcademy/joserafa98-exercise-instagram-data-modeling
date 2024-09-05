@@ -9,37 +9,33 @@ Base = declarative_base()
 
 class User (Base):
     __tablename__ = 'User'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+   
     id = Column(Integer, primary_key=True)
-    username = Column(String(5), nullable=False)
-    firstname = Column(String(5), nullable=False)
-    lastname = Column(String(5), nullable=False)
-    email = Column(String(5), nullable=False)
+    username = Column(String(250), nullable=False)
+    firstname = Column(String(250), nullable=False)
+    lastname = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
 
 class Follower(Base):
     __tablename__ = 'follower'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+    
     id = Column(Integer, primary_key=True)
     user_from_id = Column(Integer, ForeignKey('user.id'))
     user_to_id = Column(Integer, ForeignKey('user.id'))
 
 class Post (Base):
     __tablename__ = 'Post'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+    
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    URL = Column(String(5), nullable=False)
-    text = Column(String(5), nullable=False)
+    URL = Column(String(250), nullable=False)
+    text = Column(String(250), nullable=False)
 
 class Comment(Base):
     __tablename__ = 'comments'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+   
     id = Column(Integer, primary_key=True)
-    comment_text = Column(String(5), nullable=False)
+    comment_text = Column(String(250), nullable=False)
     author_id = Column(Integer, ForeignKey('user.id'))
     post_id = Column(Integer, ForeignKey('post.id'))
    
@@ -47,7 +43,7 @@ class Comment(Base):
     def to_dict(self):
         return {}
 
-## Draw from SQLAlchemy base
+
 try:
     result = render_er(Base, 'diagram.png')
     print("Success! Check the diagram.png file")
